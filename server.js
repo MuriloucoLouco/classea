@@ -25,16 +25,21 @@ app.get('/', async (req, res) => {
 		credentials.cpf = req.query.senha;
 	}
 	
-	set_values(credentials);
-	const { cookie, alunos } = await scrape_alunos();
-	
-	if (req.query.aluno && req.query.aluno != '') {
-		const aluno = req.query.aluno;
-		const notas = await scrape_boletim(cookie, aluno);
-		res.json(notas);
+	if (!Object.keys(req.query).length == 0) {
+		console.log(req.query);
+		set_values(credentials);
+		const { cookie, alunos } = await scrape_alunos();
 		
+		if (req.query.aluno && req.query.aluno != '') {
+			const aluno = req.query.aluno;
+			const notas = await scrape_boletim(cookie, aluno);
+			res.json(notas);
+			
+		} else {
+			res.json(alunos);
+		}
 	} else {
-		res.json(alunos);
+		res.json({erro: 'parametros vazios'});
 	}
 });
 
