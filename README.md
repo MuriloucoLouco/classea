@@ -1,5 +1,9 @@
 # AVISO:
 Esse código não é oficial, a escola não é responsável por nenhum problema causado, e muito menos eu. Use por sua conta e risco.
+Instale clonando o repositório, e instalando com `npm install`, (ou com yarn, se preferir).
+Por padrão, rodar `npm start` vai iniciar o main.js. Você precisará colocar suas credenciais manualmente antes de iniciar, se não, irá dar erro.
+Essa api foi feita para back-end apenas. Por conta do CORS, não irá funcionar no front-end.
+
 
 # Como usar:
 
@@ -65,5 +69,5 @@ Nesse caso, `aluno` retornará `'1235'`, baseado no objeto de exemplo acima.
 Com o objeto `notas`, você pode acessar a nota que quiser, do aluno escolhido. Exemplo:
 ```javascript
 const nota = notas.matematica.bimestre['2'].p_1
-//'nota' vale '10.0' (a não ser que você seja burro)
+//nota vale '10.0' (a não ser que você seja burro).
 ```
