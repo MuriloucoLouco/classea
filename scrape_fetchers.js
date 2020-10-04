@@ -1,6 +1,8 @@
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 const indexContratante =  'https://sistemaclassea.com.br/sistema/indexContratante.php';
 const manterContratante = 'https://sistemaclassea.com.br/sistema/manterContratante.php';
 const manterEstudante = 'https://sistemaclassea.com.br/sistema/manterEstudante.php';

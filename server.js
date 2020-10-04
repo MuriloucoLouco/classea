@@ -27,12 +27,12 @@ app.get('/', async (req, res) => {
 	
 	if (!Object.keys(req.query).length == 0) {
 		console.log(req.query);
-		set_values(credentials);
-		const { cookie, alunos } = await scrape_alunos();
+		const formularios = set_values(credentials);
+		const { cookie, alunos } = await scrape_alunos(formularios);
 		
 		if (req.query.aluno && req.query.aluno != '') {
 			const aluno = req.query.aluno;
-			const notas = await scrape_boletim(cookie, aluno);
+			const notas = await scrape_boletim(cookie, formularios, aluno);
 			res.json(notas);
 			
 		} else {
