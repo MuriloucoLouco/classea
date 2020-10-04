@@ -68,7 +68,7 @@ const credentials = {
     senha : '12345678900',
     ano : '2020',
     escola : '1' // '0' é Vila, '1' é Centro.
-}
+};
 ```
 Crie uma função assíncrona:
 ```javascript
@@ -78,18 +78,17 @@ async function main() {
 
 main();
 ```
-Dentro dela, defina as credenciais com `set_values`:
+Dentro dela, defina as credenciais com `set_values`, isso dará o retorno de `formularios`, um objeto com todos os formulários necessários para fazer as requisições.
 ```javascript
 async function main() {
-    set_values(credentials);
+    const formularios = set_values(credentials);
 }
 ```
-Depois, adquira o `cookie` (necessário para login), e o objeto `alunos`.
-É necessário usar await.
+Depois, adquira o `cookie` (necessário para login), e o objeto `alunos`. Você precisa passar o objeto `formularios`.
 ```javascript
 async function main() {
-    set_values(credentials);
-    const { cookie, alunos } = await scrape_alunos();
+    const formularios = set_values(credentials);
+    const { cookie, alunos } = await scrape_alunos(formularios);
     /*
     Formato do objeto 'alunos':
     [
@@ -105,12 +104,12 @@ async function main() {
     */
 }
 ```
-Finalmente, do objeto 'alunos', você deve pegar o id do aluno que quer pegar as notas, e passar para a função `scrape_boletim`, após o `cookie`:
+Finalmente, do objeto `alunos`, você deve pegar o id do aluno que quer pegar as notas, e passar para a função `scrape_boletim`, após o `cookie`:
 ```javascript
 async function main() {
-    set_values(credentials);
+    const formularios = set_values(credentials);
     const { cookie, alunos } = await scrape_alunos();
-    const aluno = alunos[1].id
+    const aluno = alunos[1].id;
     const notas = await scrape_boletim( cookie, aluno );
 }
 ```
