@@ -17,15 +17,19 @@ app.get('/', async (req, res) => {
 		credentials.ano = String(date.getFullYear());
 	}
 	
-	if (!req.query.senha) {
+	if (!req.query.senha && req.query.cpf) {
 		credentials.senha = req.query.cpf;
 	}
 	
-	if (!req.query.cpf) {
+	if (!req.query.cpf && req.query.senha) {
 		credentials.cpf = req.query.senha;
 	}
 	
-	if (!Object.keys(req.query).length == 0) {
+	if (!req.query.escola) {
+		credentials.escola = 1;
+	}
+	
+	if (!Object.keys(req.query).length == 0 && (credentials.cpf || credentials.senha)) {
 		console.log(req.query);
 		const formularios = set_values(credentials);
 		const { cookie, alunos } = await scrape_alunos(formularios);
